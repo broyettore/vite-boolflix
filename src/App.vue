@@ -13,13 +13,34 @@ export default {
   components: {
     headerComp,
     mainComp
-  }
+  },
+  methods: {
+
+    searchMovie() {
+      axios.get(this.store.apiMovie, {
+        params: {
+          api_key: this.store.apiKey,
+          language: this.store.lang,
+          query: this.store.searchKey
+        }
+      })
+      .then((response) => {
+        this.store.movieList = response.data.results,
+        this.store.searchKey = "",
+        console.log(this.store.movieList)
+      })
+      .catch((error) => {
+        console.log(error);
+        this.store.movieList = [];
+      })
+    }
+},
 }
 </script>
 
 <template>
   <headerComp></headerComp>
-  <mainComp></mainComp>
+  <mainComp @findMovie="searchMovie"></mainComp>
 </template>
 
 <style lang="scss" scoped>
