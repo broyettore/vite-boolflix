@@ -6,6 +6,13 @@ export default {
         return {
             store,
         }
+    },
+
+    methods: {
+
+        getNum(element) {
+            return Math.ceil(element)
+        },
     }
 }
 </script>
@@ -16,10 +23,10 @@ export default {
         <div class="container ms-ctn p-2 d-flex flex-column justify-content-startalign-items-start">
             <div class="input-group mb-5 ms-search">
                 <input type="text" class="form-control ms-input" v-model="store.searchKey" placeholder="search a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary ms-btn" @click="$emit('findMovie')" type="button" id="button-addon2">Button</button>
+                <button class="btn btn-outline-secondary ms-btn" @click="$emit('findMovie')" type="button" id="button-addon2">Go !</button>
             </div>
             <ul>
-                <li v-for="movie in store.movieList" class="p-2">TItle : {{ movie.title }}, Original Title: {{ movie.original_title }}, Original Language: {{ movie.original_language }}, Vote: {{ movie.vote_average }}.</li>
+                <li v-for="movie in store.resultList" class="p-2">TItle : {{ movie.title || movie.name }}, Original Title: {{ movie.original_title || movie.original_name }}, Original Language: {{ movie.original_language.toUpperCase() }}, Vote: {{ getNum(movie.vote_average) }}.</li>
             </ul>
         </div>
     </main>

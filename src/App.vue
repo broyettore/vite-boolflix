@@ -17,7 +17,7 @@ export default {
   methods: {
 
     searchMovie() {
-      axios.get(this.store.apiMovie, {
+      axios.get(this.store.apiMultiSearch, {
         params: {
           api_key: this.store.apiKey,
           language: this.store.lang,
@@ -25,13 +25,13 @@ export default {
         }
       })
       .then((response) => {
-        this.store.movieList = response.data.results,
+        this.store.resultList = response.data.results,
         this.store.searchKey = "",
-        console.log(this.store.movieList)
+        console.log(this.store.resultList)
       })
       .catch((error) => {
         console.log(error);
-        this.store.movieList = [];
+        this.store.resultList = [];
       })
     }
 },
