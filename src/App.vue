@@ -1,7 +1,8 @@
 <script>
 import axios from 'axios';
 import { store } from './store';
-import testComp from './components/testComp.vue';
+import headerComp from './components/headerComp.vue';
+import mainComp from './components/mainComp.vue';
 
 export default {
   data() {
@@ -10,14 +11,15 @@ export default {
     }
   },
   components: {
-    testComp
+    headerComp,
+    mainComp
   }
 }
-
 </script>
 
 <template>
-  <testComp></testComp>
+  <headerComp></headerComp>
+  <mainComp></mainComp>
 </template>
 
 <style lang="scss" scoped>
