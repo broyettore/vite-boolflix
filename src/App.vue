@@ -20,7 +20,6 @@ export default {
       axios.get(this.store.apiMultiSearch, {
         params: {
           api_key: this.store.apiKey,
-          language: this.store.lang,
           query: this.store.searchKey
         }
       })
