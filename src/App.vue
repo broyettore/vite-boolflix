@@ -39,7 +39,7 @@ export default {
 
 <template>
   <headerComp></headerComp>
-  <mainComp @findMovie="searchMovie"></mainComp>
+  <mainComp @filterResult="searchMovie"></mainComp>
 </template>
 
 <style lang="scss" scoped>
