@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 export default {
     data() {
         return {
-            imageSize: "https://image.tmdb.org/t/p/w185/",
+            imageSize: "https://image.tmdb.org/t/p/w342/",
             store,
         }
     },
@@ -49,26 +49,28 @@ export default {
         originalName: String,
         originalLang: String,
         vote: Number,
+        summary: String,
     }
 
 }
 </script>
 
 <template>
-            <div  class="my-2 list-ctn text-center">
+            <div  class="m-3 list-ctn">
                 <div class="card-top">
                     <img :src="imageSize+img" alt="image not available">
-                </div>
-                <div class="card-info">
-                    <ul>
-                        <li>TItle : {{ title || name }}</li>
-                        <li>Original Title: {{ originalTitle|| originalName }}</li>
-                        <li>Original Language:    <country-flag :country='getFlag(originalLang)' size='small'/></li>
-                        <li>Vote: 
-                            <font-awesome-icon icon="fa-solid fa-star" v-for="n in getRoundedNum(vote)" />
-                            <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getRoundedNum(vote)" />
-                        </li>
-                    </ul>
+                    <div class="card-info">
+                        <ul>
+                            <li>TItle : {{ title || name }}</li>
+                            <li>Original Title: {{ originalTitle|| originalName }}</li>
+                            <li>Original Language:    <country-flag :country='getFlag(originalLang)' size='small'/></li>
+                            <li>Vote: 
+                                <font-awesome-icon icon="fa-solid fa-star" v-for="n in getRoundedNum(vote)" />
+                                <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getRoundedNum(vote)" />
+                            </li>
+                            <li>Overview: {{ summary }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 </template>
@@ -78,14 +80,53 @@ export default {
 
 .list-ctn {
      color: $font-color;
+     width: 342px;
+     height: 513px;
+     opacity: 0;
+     animation: fadeIn 1s 1.5s linear forwards;
+
+     @keyframes fadeIn {
+
+        0% {
+            transform: translateY(-10%);
+        }
+
+        100% {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+        
+     }
 
     .card-top {
-        height: 278px;
+        position: relative;
+        height: 100%;
+
+        &:hover {
+            transform: scale(1.05);
+            transition: ease .40S;
+        }
+
+        &:hover .card-info {
+            display: block;
+            cursor: pointer;
+        }
+        .card-info {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 10px;
+            background-color: $bg-hover-color;
+            height: 100%;
+            width: 342px;
+            overflow-y: scroll;
+        }
+    
+        li {
+            padding: 1px 0;
+        }
     }
 
-    li {
-        padding: 1px 0;
-    }
 }
-
 </style>

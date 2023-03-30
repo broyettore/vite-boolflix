@@ -34,12 +34,30 @@ export default {
       })
     }
 },
+created() {
+
+axios.get(this.store.apiMultiSearch, {
+      params: {
+        api_key: this.store.apiKey,
+        query: "top",
+      }
+    })
+    .then((response) => {
+      this.store.resultList = response.data.results,
+      this.store.searchKey = "",
+      console.log(this.store.resultList)
+    })
+    .catch((error) => {
+      console.log(error);
+      this.store.resultList = [];
+    })
+}
 }
 </script>
 
 <template>
-  <headerComp></headerComp>
-  <mainComp @filterResult="searchMovie"></mainComp>
+  <headerComp @filterResult="searchMovie"></headerComp>
+  <mainComp></mainComp>
 </template>
 
 <style lang="scss" scoped>

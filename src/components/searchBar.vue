@@ -1,5 +1,6 @@
 <script>
 import { store } from '../store';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
     data() {
@@ -7,29 +8,43 @@ export default {
             store,
         }
     },
+    components: {
+        FontAwesomeIcon,
+    }
 }
 </script>
 
 <template>
-    <div class="input-group mb-4 ms-search">
-        <input type="text" class="form-control ms-input" v-model="store.searchKey" placeholder="search a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary ms-btn" @click="$emit('findMovie')" type="button" id="button-addon2">Go !</button>
+    <div>
+        <label for="searchBar"></label>
+        <input type="text" v-model="store.searchKey" placeholder="search a movie..." id="searcBar" class="searchBar">
+        <button class="ms-btn" @click="$emit('findMovie')">
+            <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+        </button>
     </div>
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/style/_partials/variables.scss' as *;
-    .ms-search {
-        width: 30%;
-        .ms-input:focus {
-            box-shadow: none;
-            outline: none;
-            border-color: 0;
-        }
 
-        .ms-btn {
-            background-color: crimson;
-            color: #fff;
-        }
+.searchBar {
+    border: 0;
+    background-color: lighten($bg-color, 50%);
+    border-radius: 10px 0 0 10px;
+    padding: 2px 6px;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0px 0px 3px 3px #FF2B5B;
     }
+}
+
+.ms-btn {
+    background-color: crimson;
+    color: $font-color;
+    border: 0;
+    border-radius: 0 10px 10px 0;
+    padding: 2px 6px;
+}
+
 </style>
