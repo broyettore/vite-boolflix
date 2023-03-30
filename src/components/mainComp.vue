@@ -15,7 +15,7 @@ export default {
     components: {
         CountryFlag,
         searchBar,
-        cardComp
+        cardComp,
     },
 
     methods: {
@@ -31,9 +31,11 @@ export default {
 <template>
 <header>
     <main>
-        <div class="container ms-ctn p-2 d-flex flex-column justify-content-startalign-items-start">
+        <div class="container ms-ctn p-2 d-flex flex-column  align-items-center">
             <searchBar @findMovie="getResult"></searchBar>
-            <cardComp v-for="result in store.resultList" :title="result.title" :name="result.name" :originalTitle="result.original_title" :originalName="result.originalName" :originalLang="result.original_language" :vote="result.vote_average"></cardComp>
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5  ms-card-ctn">
+                <cardComp class="col" v-for="result in store.resultList" :img="result.poster_path" :title="result.title" :name="result.name" :originalTitle="result.original_title" :originalName="result.original_name" :originalLang="result.original_language" :vote="result.vote_average" />
+            </div>
             <div class="alert" v-if="store.resultList.length === 0">
                 <p>{{ alertMsg }}</p>
             </div>
@@ -47,11 +49,10 @@ export default {
 
 main {
     color: $font-color;
-    height: calc(100vh - 60px);
 
-    .ms-ctn {
-        height: 100%;
-        overflow-y: scroll;
+    .ms-card-ctn {
+        width: 100%;
     }
+
 }
 </style>
