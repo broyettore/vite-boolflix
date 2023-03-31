@@ -15,13 +15,39 @@ export default {
     mainComp
   },
   methods: {
-
     searchMovie() {
-      axios.get(this.store.apiMultiSearch, {
+      const promise1 = axios.get(this.store.endpoints.movie, {
         params: {
           api_key: this.store.apiKey,
           query: this.store.searchKey
         }
+      });
+      const promise2 = axios.get(this.store.endpoints.series, {
+        params: {
+          api_key: this.store.apiKey,
+          query: this.store.searchKey
+        }
+      });
+      Promise.all([promise1, promise2])
+      .then((response) => {
+        // const finalResponse = Object.assign(response[0].data, response[1].data)
+        const finalResponse = response[0].data.results.concat(response[1].data.results);
+        this.store.resultList = finalResponse,
+        this.store.searchKey = "",
+        console.log(finalResponse)
+      })
+      .catch((error) => {
+        console.log(error);
+        this.store.resultList = [];
+      });
+    },
+  },
+  created() {
+        axios.get(this.store.endpoints.MultiSearch, {
+         params: {
+          api_key: this.store.apiKey,
+          query: "a"
+       }
       })
       .then((response) => {
         this.store.resultList = response.data.results,
@@ -31,27 +57,8 @@ export default {
       .catch((error) => {
         console.log(error);
         this.store.resultList = [];
-      })
+      });
     }
-},
-created() {
-
-axios.get(this.store.apiMultiSearch, {
-      params: {
-        api_key: this.store.apiKey,
-        query: "top",
-      }
-    })
-    .then((response) => {
-      this.store.resultList = response.data.results,
-      this.store.searchKey = "",
-      console.log(this.store.resultList)
-    })
-    .catch((error) => {
-      console.log(error);
-      this.store.resultList = [];
-    })
-}
 }
 </script>
 
@@ -64,3 +71,5 @@ axios.get(this.store.apiMultiSearch, {
 @use './assets/style/_partials/variables.scss' as *;
 
 </style>
+
+

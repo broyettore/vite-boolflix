@@ -1,24 +1,26 @@
 <script>
 import { store } from '../store';
 import searchBar from './searchBar.vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 export default {
     data() {
         return {
+            isActive: false,
             store,
         }
     },
     components: {
-        searchBar
+        searchBar,
+        FontAwesomeIcon,
     },
     methods: {
 
-    getResult() {
-            this.$emit('filterResult')
-        }
+        getResult() {
+                this.$emit('filterResult')
+        },
 },
 }
-
 </script>
 
 <template>
@@ -28,8 +30,8 @@ export default {
             <h1 class="me-4 fs-1">
                 <a href=".">Boolflix</a>
             </h1>
-            <nav class="d-lg-flex align-items-center d-none">
-                <ul class="d-flex">
+            <nav class="d-lg-flex align-items-center">
+                <ul class="d-none d-lg-flex">
                     <lI class="m-2 p-2">
                         <a href="#">Tv Shows</a>
                     </lI>
@@ -48,7 +50,29 @@ export default {
                 </ul>
             </nav>
         </div>
-        <searchBar @findMovie="getResult"></searchBar>
+        <div class="btn-group d-lg-none ms-drop-group">
+            <button type="button" class="btn btn-secondary ms-drop-btn" data-bs-toggle="dropdown" aria-expanded="false">
+                <font-awesome-icon icon="fa-solid fa-bars" />
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end ms-drop">
+                <li>
+                    <a class="dropdown-item ms-drop-item py-2" href="#">Tv Show</a>
+                </li>
+                <li>
+                    <a class="dropdown-item ms-drop-item py-2" href="#">Movies</a>
+                </li>
+                <li>
+                    <a class="dropdown-item ms-drop-item py-2" href="#">Originals</a>
+                </li>
+                <li>
+                    <a class="dropdown-item ms-drop-item py-2" href="#">Recently Watched</a>
+                </li>
+                <li>
+                    <a class="dropdown-item ms-drop-item py-2" href="#">My List</a>
+                </li>
+            </ul>
+       </div>
+        <searchBar @findMovie="getResult" class="d-none d-lg-block"></searchBar>
     </div>
 </header>
 </template>
@@ -57,8 +81,32 @@ export default {
 @use '../assets/style/_partials/variables.scss' as *;
 
 header {
-    background-color: $bg-color;
+    background-color: $bg-hover-color;
     color: $font-color;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    .ms-drop-group {
+        width: 50px;
+
+        .ms-drop-btn {
+        background-color: $header-color;
+        border: 0;
+        border-radius: 10px;
+    }
+
+    .ms-drop {
+        background-color: $bg-color;
+        width: 100vw;
+        text-align: center;
+
+        .ms-drop-item:hover {
+            background-color: $header-color;
+            color: $font-color;
+            transition: background-color .30s;
+        }
+    }
+    }
 
     h1 {
 
@@ -68,7 +116,7 @@ header {
         }
 
         a {
-            color: crimson;
+            color: $header-color;
         }
     }
 
@@ -76,7 +124,7 @@ header {
         color: $font-color;
 
         &:hover {
-            color: crimson;
+            color: $header-color;
             transition: color .30s;
         }
     }

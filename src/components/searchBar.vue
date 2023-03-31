@@ -17,7 +17,7 @@ export default {
 <template>
     <div>
         <label for="searchBar"></label>
-        <input type="text" v-model="store.searchKey" placeholder="search a movie..." id="searcBar" class="searchBar">
+        <input type="text" v-model="store.searchKey" @keyup.enter="$emit('findMovie')" placeholder="search a movie..." id="searcBar" class="searchBar">
         <button class="ms-btn" @click="$emit('findMovie')">
             <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
         </button>

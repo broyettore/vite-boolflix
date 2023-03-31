@@ -7,6 +7,7 @@ export default {
     data() {
         return {
             imageSize: "https://image.tmdb.org/t/p/w342/",
+            backupImg: "./",
             store,
         }
     },
@@ -39,7 +40,7 @@ export default {
                 default: 
                     return element;
             }
-     }
+        },
     },
     props: {
         img: String,
@@ -59,6 +60,7 @@ export default {
             <div  class="m-3 list-ctn">
                 <div class="card-top">
                     <img :src="imageSize+img" alt="image not available">
+                    <font-awesome-icon icon="fa-regular fa-image" class="ms-backup" v-if="img === null"/>
                     <div class="card-info">
                         <ul>
                             <li>TItle : {{ title || name }}</li>
@@ -77,7 +79,6 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/style/_partials/variables.scss' as *;
-
 .list-ctn {
      color: $font-color;
      width: 342px;
@@ -101,6 +102,7 @@ export default {
     .card-top {
         position: relative;
         height: 100%;
+        width: 100%;
 
         &:hover {
             transform: scale(1.05);
@@ -110,6 +112,19 @@ export default {
         &:hover .card-info {
             display: block;
             cursor: pointer;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .ms-backup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
         }
         .card-info {
             display: none;
