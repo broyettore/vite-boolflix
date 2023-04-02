@@ -25,7 +25,7 @@ export default {
 
 <template>
 <header>
-    <div class="container ms-ctn py-3 d-flex align-items-center justify-content-between">
+    <div class="ms-ctn py-3 px-2 d-flex align-items-center justify-content-between">
         <div class="menu d-flex align-items-center">
             <h1 class="me-4 fs-1">
                 <a href=".">Boolflix</a>
@@ -54,7 +54,10 @@ export default {
             <button type="button" class="btn btn-secondary ms-drop-btn" data-bs-toggle="dropdown" aria-expanded="false">
                 <font-awesome-icon icon="fa-solid fa-bars" />
             </button>
-            <ul class="dropdown-menu dropdown-menu-end ms-drop">
+            <ul class="dropdown-menu dropdown-menu-end ms-drop px-2">
+                <li>
+                    <searchBar @findMovie="getResult" class="py-2 px-3"></searchBar>
+                </li>
                 <li>
                     <a class="dropdown-item ms-drop-item py-2" href="#">Tv Show</a>
                 </li>
@@ -72,7 +75,7 @@ export default {
                 </li>
             </ul>
        </div>
-        <searchBar @findMovie="getResult" class="d-none d-lg-block"></searchBar>
+        <searchBar @findMovie="getResult"  class="d-none d-lg-block"></searchBar>
     </div>
 </header>
 </template>
@@ -97,8 +100,9 @@ header {
 
     .ms-drop {
         background-color: $bg-color;
+        max-width: 992px;
         width: 100vw;
-        text-align: center;
+        text-align: right;
 
         .ms-drop-item:hover {
             background-color: $header-color;
@@ -130,6 +134,8 @@ header {
     }
     .ms-ctn {
         height: 100%;
+        max-width: 1452px;
+        margin: 0 auto;
     }
 }
 </style>
