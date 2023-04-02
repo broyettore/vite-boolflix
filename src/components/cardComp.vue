@@ -43,14 +43,7 @@ export default {
         },
     },
     props: {
-        img: String,
-        title: String,
-        name: String,
-        originalTitle: String,
-        originalName: String,
-        originalLang: String,
-        vote: Number,
-        summary: String,
+        info: Object,
     }
 
 }
@@ -59,18 +52,18 @@ export default {
 <template>
             <div  class="m-3 list-ctn">
                 <div class="card-top">
-                    <img :src="imageSize+img" alt="image not available">
+                    <img :src="imageSize+info.poster_path" alt="image not available">
                     <font-awesome-icon icon="fa-regular fa-image" class="ms-backup" v-if="img === null"/>
                     <div class="card-info">
                         <ul>
-                            <li>TItle : {{ title || name }}</li>
-                            <li>Original Title: {{ originalTitle|| originalName }}</li>
-                            <li>Original Language:    <country-flag :country='getFlag(originalLang)' size='small'/></li>
+                            <li>TItle : {{ info.title || info.name }}</li>
+                            <li>Original Title: {{ info.original_title|| info.original_name }}</li>
+                            <li>Original Language:    <country-flag :country='getFlag(info.original_language)' size='small'/></li>
                             <li>Vote: 
-                                <font-awesome-icon icon="fa-solid fa-star" v-for="n in getRoundedNum(vote)" />
-                                <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getRoundedNum(vote)" />
+                                <font-awesome-icon icon="fa-solid fa-star" v-for="n in getRoundedNum(info.vote)" />
+                                <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getRoundedNum(info.vote)" />
                             </li>
-                            <li>Overview: {{ summary }}</li>
+                            <li>Overview: {{ info.overview }}</li>
                         </ul>
                     </div>
                 </div>
