@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import './assets/style/main.scss';
 import "@fontsource/roboto";
-import * as bootstrap from 'bootstrap'
+import "../node_modules/bootstrap/js/src/dropdown"
 import App from './App.vue';
 
 /* import the fontawesome core */
