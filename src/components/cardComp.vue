@@ -60,9 +60,9 @@ export default {
                             <li>Original Title: {{ info.original_title|| info.original_name }}</li>
                             <li>Original Language:    <country-flag :country='getFlag(info.original_language)' size='small'/></li>
                             <li>Vote: 
-                                <font-awesome-icon icon="fa-solid fa-star" v-for="n in getRoundedNum(info.vote)" />
-                                <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getRoundedNum(info.vote)" />
-                            </li>
+                                <font-awesome-icon icon="fa-solid fa-star" v-for="n in getRoundedNum(info.vote_average)" />
+                                <font-awesome-icon icon="fa-regular fa-star" v-for="n in 5 - getRoundedNum(info.vote_average)" />
+                            </li> 
                             <li>Overview: {{ info.overview }}</li>
                         </ul>
                     </div>
